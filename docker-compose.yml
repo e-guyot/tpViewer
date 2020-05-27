@@ -11,8 +11,10 @@ services:
         build: docker/php
         volumes:
             - './:/usr/share/nginx/html'
-    mariadb:
+    db:
         image: 'mariadb:10.3'
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
         environment:
             - MYSQL_DATABASE=docker
             - MYSQL_USER=docker
