@@ -59,23 +59,6 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://packagist.com",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/composer",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
-                    "type": "tidelift"
-                }
-            ],
->>>>>>> 1bd1eee05f0af2d156114e85f6ddad6566bfab65
             "time": "2020-08-13T12:55:41+00:00"
         },
         {
@@ -1161,23 +1144,6 @@
                 "orm",
                 "persistence"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fpersistence",
-                    "type": "tidelift"
-                }
-            ],
->>>>>>> 1bd1eee05f0af2d156114e85f6ddad6566bfab65
             "time": "2020-06-20T12:56:16+00:00"
         },
         {
@@ -1368,7 +1334,6 @@
                 "validator"
             ],
             "time": "2020-08-08T21:28:19+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "laminas/laminas-code",
@@ -1540,8 +1505,6 @@
                 "zf"
             ],
             "time": "2020-05-20T16:45:56+00:00"
-=======
->>>>>>> 1bd1eee05f0af2d156114e85f6ddad6566bfab65
         },
         {
             "name": "monolog/monolog",
@@ -6242,31 +6205,6 @@
                 "extra",
                 "twig"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://certification.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://live.symfony.com/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://symfony.com/cloud/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
-                    "type": "tidelift"
-                }
-            ],
->>>>>>> 1bd1eee05f0af2d156114e85f6ddad6566bfab65
             "time": "2020-05-21T09:56:39+00:00"
         },
         {
@@ -6329,70 +6267,7 @@
             "keywords": [
                 "templating"
             ],
-<<<<<<< HEAD
             "time": "2020-08-05T15:13:19+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-08-05T15:13:19+00:00"
-        },
-        {
-            "name": "webmozart/assert",
-            "version": "1.9.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0 || ^8.0",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "conflict": {
-                "phpstan/phpstan": "<0.12.20",
-                "vimeo/psalm": "<3.9.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.36 || ^7.5.13"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Webmozart\\Assert\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                }
-            ],
-            "description": "Assertions to validate method input/output with nice error messages.",
-            "keywords": [
-                "assert",
-                "check",
-                "validate"
-            ],
-            "time": "2020-07-08T17:02:28+00:00"
->>>>>>> 1bd1eee05f0af2d156114e85f6ddad6566bfab65
         },
         {
             "name": "webimpress/safe-writer",
@@ -6972,23 +6847,6 @@
                 "MIT"
             ],
             "description": "A pack for the Symfony web profiler",
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
->>>>>>> 1bd1eee05f0af2d156114e85f6ddad6566bfab65
             "time": "2020-08-12T06:50:46+00:00"
         },
         {
@@ -7096,6 +6954,5 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "platform-dev": []
 }
