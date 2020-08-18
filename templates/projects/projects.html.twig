@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProjectsController!{% endblock %}
+
+{% block body %}
+    <h1>Lise des produits</h1>
+    <p><a href="{{ path('add_projects') }}">Ajouter un produit</a></p>
+    {% for product in products %}
+        <table>
+            <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>ID Groupe</th>
+            <th>Name</th>
+            </thead>
+            <tbody>
+            <td>{{ projects.id }}</td>
+            <td>{{ projects.name }}</td>
+            <td>{{ projects.id_groupe }}</td>
+            <td>{{ projects.name }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
