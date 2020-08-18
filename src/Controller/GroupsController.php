@@ -23,7 +23,7 @@ class GroupsController extends AbstractController
     /**
      * @Route("/add-groups", name="add_groups")
      */
-    public function addProjects(Request $request)
+    public function addGroup(Request $request)
     {
         $groups = new Groups();
         $form = $this->createForm(GroupsFormType::class, $groups);

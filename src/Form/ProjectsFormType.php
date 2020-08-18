@@ -20,8 +20,7 @@ class ProjectsFormType extends AbstractType
                 'class' => Groups::class,
                 'choice_label' => 'name',
             ])
-            ->add('submit', SubmitType::class)
-        ;
+            ->add('submit', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

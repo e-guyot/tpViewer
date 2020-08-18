@@ -47,4 +47,22 @@ class ProjectsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findUserProject(int $idUser)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p.id id, p.name p_name, g.name g_name
+        FROM App\Entity\Projects p
+        INNER JOIN App\Entity\UserGroup ug 
+        INNER JOIN App\Entity\Groups g
+        WHERE ug.id_user = :id'
+        )->setParameter('id', 1);
+
+
+        return $query->getResult();
+    }
 }
