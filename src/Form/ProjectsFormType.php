@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Groups;
 use App\Entity\Projects;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +16,10 @@ class ProjectsFormType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('id_group')
+            ->add('id_group', EntityType::class, [
+                'class' => Groups::class,
+                'choice_label' => 'name',
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
