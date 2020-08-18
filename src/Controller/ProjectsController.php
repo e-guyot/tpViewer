@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Groups;
+use App\Entity\User;
 use App\Form\ProjectsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,9 +47,10 @@ class ProjectsController extends AbstractController
      */
     public function projects()
     {
-        $projects = $this->getDoctrine()->getRepository(Projects::class)->findAll();
+        $user = $this->getUser();
+        $projects = $this->getDoctrine()->getRepository(Projects::class)->findUserProject($user->getId());
 
-        return $this->render('projects/projects-form.html.twig', [
+        return $this->render('projects/projects.html.twig', [
             "projects" => $projects,
         ]);
     }

@@ -3,22 +3,22 @@
 {% block title %}Hello ProjectsController!{% endblock %}
 
 {% block body %}
-    <h1>Lise des produits</h1>
-    <p><a href="{{ path('add_projects') }}">Ajouter un produit</a></p>
-    {% for product in products %}
+    <h1>Liste des projets</h1>
+    <p><a href="{{ path('add_projects') }}">Créer un projet</a></p>
+    {% for project in projects %}
         <table>
             <thead>
             <th>ID</th>
             <th>Name</th>
             <th>ID Groupe</th>
-            <th>Name</th>
             </thead>
             <tbody>
-            <td>{{ projects.id }}</td>
-            <td>{{ projects.name }}</td>
-            <td>{{ projects.id_groupe }}</td>
-            <td>{{ projects.name }}</td>
+            <td>{{ project.id }}</td>
+            <td>{{ project.p_name }}</td>
+            <td>{{ project.g_name }}</td>
             </tbody>
         </table>
+    {% else %}
+        <li><em>no projects found</em></li>
     {% endfor %}
 {% endblock %}
