@@ -8,25 +8,39 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#{{ path('home')}}">Chronos</a>
+    <a class="navbar-brand" href="{{ path('home')}}">Chronos</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
+    {% if app.user %}
+    <div class="mb-3">
+        You are logged in as {{ app.user.username }}
+    </div>
+    {% endif %}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('home') }}">home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('home') }}">projects</a>
+                <a class="nav-link" href="{{ path('projects') }}">projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('home') }}">groups</a>
+                <a class="nav-link" href="{{ path('add_groups') }}">groups</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('home') }}">users</a>
             </li>
+            {% if app.user %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+            </li>
+            {% endif %}
+
         </ul>
     </div>
 </nav>
