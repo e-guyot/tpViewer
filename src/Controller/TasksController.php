@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Asset\PathPackage;
+use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
 
 /**
  * @Route("/tasks")
@@ -20,8 +22,10 @@ class TasksController extends AbstractController
      */
     public function index(TasksRepository $tasksRepository): Response
     {
+        $package = new PathPackage('/assets/js', new StaticVersionStrategy());
         return $this->render('tasks/index.html.twig', [
             'tasks' => $tasksRepository->findAll(),
+            'app_timer' => $package->getUrl('/timer.js')
         ]);
     }
 

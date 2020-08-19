@@ -55,12 +55,11 @@ class ProjectsRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT p.id id, p.name p_name, g.name g_name
+            'SELECT p.id id, p.name p_name, ug.name g_name
         FROM App\Entity\Projects p
-        INNER JOIN App\Entity\UserGroup ug 
-        INNER JOIN App\Entity\Groups g
+        JOIN App\Entity\UserGroup ug 
         WHERE ug.id_user = :id'
-        )->setParameter('id', 1);
+        )->setParameter('id', $idUser);
 
 
         return $query->getResult();
