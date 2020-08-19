@@ -2,29 +2,34 @@
 
 namespace App\Controller;
 
-use App\Entity\Groups;
-use App\Entity\User;
 use App\Form\ProjectsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Projects;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/projects")
+ */
 class ProjectsController extends AbstractController
 {
     /**
-     * @Route("/projects", name="projects")
+     * @Route("/", name="projects")
      */
     public function index()
     {
+        $user = $this->getUser();
+        $projects = $this->getDoctrine()->getRepository(Projects::class)->findUserProject($user->getId());
+
         return $this->render('projects/index.html.twig', [
-            'controller_name' => 'ProjectsController',
+            "projects" => $projects,
         ]);
     }
     /**
-     * @Route("/add-projects", name="add_projects")
+     * @Route("/new", name="projects_new")
      */
-    public function addProjects ( Request $request ) : \Symfony\Component\HttpFoundation\Response
+    public function newProject (Request $request)
     {
         $projects = new Projects();
         $form = $this->createForm(ProjectsFormType::class, $projects);
@@ -35,24 +40,50 @@ class ProjectsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($projects);
             $entityManager->flush();
+
+            return $this->redirectToRoute('projects');
         }
 
-        return $this->render("projects/projects-form.html.twig", [
+        return $this->render("projects/form.html.twig", [
             "form_title" => "Ajouter un projects",
             "form_projects" => $form->createView(),
         ]);
     }
-    /**
-     * @Route("/projects", name="projects")
-     */
-    public function projects()
-    {
-        $user = $this->getUser();
-        $projects = $this->getDoctrine()->getRepository(Projects::class)->findUserProject($user->getId());
 
-        return $this->render('projects/projects.html.twig', [
-            "projects" => $projects,
+    /**
+     * @Route("/edit/{id}", name="projects_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Projects $project)
+    {
+        $form = $this->createForm(ProjectsFormType::class, $project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('projects');
+        }
+
+        return $this->render('projects/form.html.twig', [
+            'form_title' => "Modifier projet",
+            'project' => $project,
+            'form_projects' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/delete/{id}", name="projects_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Projects $project): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($project);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('projects');
+    }
+
 
 }

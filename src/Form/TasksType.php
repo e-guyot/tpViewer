@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Projects;
 use App\Entity\Tasks;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,12 +15,15 @@ class TasksType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('timer')
-            ->add('date_start')
-            ->add('date_end')
             ->add('name')
-            ->add('id_user')
-            ->add('id_project')
+            ->add('id_user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'username',
+            ])
+            ->add('id_project', EntityType::class, [
+                'class' => Projects::class,
+                'choice_label' => 'name',
+            ])
         ;
     }
 

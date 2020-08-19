@@ -9,10 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Groups;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/groups")
+ */
 class GroupsController extends AbstractController
 {
     /**
-     * @Route("/groups", name="groups")
+     * @Route("/", name="groups")
      */
     public function index()
     {
@@ -21,9 +24,9 @@ class GroupsController extends AbstractController
         ]);
     }
     /**
-     * @Route("/add-groups", name="add_groups")
+     * @Route("/new", name="groups_new")
      */
-    public function addGroup(Request $request)
+    public function newGroup(Request $request)
     {
         $groups = new Groups();
         $form = $this->createForm(GroupsFormType::class, $groups);
@@ -41,15 +44,26 @@ class GroupsController extends AbstractController
             "form_groups" => $form->createView(),
         ]);
     }
-    /**
-     * @Route("/groups/{id}", name="groups")
-     */
-    public function groups(int $id): \Symfony\Component\HttpFoundation\Response
-    {
-        $groups = $this->getDoctrine()->getRepository(groups::class)->find($id);
 
-        return $this->render("groups/groups.html.twig", [
-            "groups" => $groups,
-        ]);
-    }
+//    /**
+//     * @Route("/edit/{id}", name="groups_edit", methods={"GET","POST"})
+//     */
+//    public function edit(Request $request, Groups $group)
+//    {
+//        $form = $this->createForm(Groups::class, $group);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $this->getDoctrine()->getManager()->flush();
+//
+//            return $this->redirectToRoute('groups');
+//        }
+//
+//        return $this->render('groups/form.html.twig', [
+//            'form_title' => "Modifier groupe",
+//            'group' => $group,
+//            'form_groups' => $form->createView(),
+//        ]);
+//    }
+
 }
