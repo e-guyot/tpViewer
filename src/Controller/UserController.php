@@ -17,9 +17,10 @@ class UserController extends AbstractController
      */
     public function index()
     {
+        $user = $this->getDoctrine()->getRepository(User::class)->findAll();
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
-            'users' => $usersRepository->findAll(),
+            'users' => $user,
         ]);
     }
 
@@ -34,12 +35,13 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_edit');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
+            'form_title' => "Modification de son compte",
+            'user' => $this->getUser(),
+            'form_user' => $form->createView(),
         ]);
     }
 }
