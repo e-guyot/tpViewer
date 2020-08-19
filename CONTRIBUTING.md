@@ -17,11 +17,11 @@ Dans l'intérêt de favoriser un environnement ouvert et accueillant, nous, en t
 ## Nos standards
 Voici des exemples de comportements qui contribuent à créer un environnement positif:
 
-Utiliser un langage accueillant et inclusif
-Être respectueux des points de vue et des expériences différents
-Accepter avec grâce les critiques constructives
-Se concentrer sur ce qui est le mieux pour la communauté
-Faire preuve d'empathie envers les autres membres de la communauté
+- Utiliser un langage accueillant et inclusif
+- Être respectueux des points de vue et des expériences différents
+- Accepter avec grâce les critiques constructives
+- Se concentrer sur ce qui est le mieux pour la communauté
+- Faire preuve d'empathie envers les autres membres de la communauté
 Voici des exemples de comportement inacceptable de la part des participants:
 - L'utilisation d'un langage ou d'images sexualisés et d'attention ou d'avances sexuelles indésirables
 - Commentaires trolling, insultants / désobligeants et attaques personnelles ou politiques
