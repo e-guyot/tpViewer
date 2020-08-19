@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TasksController extends AbstractController
 {
     /**
-     * @Route("/", name="tasks_index", methods={"GET"})
+     * @Route("/", name="tasks", methods={"GET"})
      */
     public function index(TasksRepository $tasksRepository): Response
     {
@@ -39,7 +39,7 @@ class TasksController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tasks_index');
+            return $this->redirectToRoute('tasks');
         }
 
         return $this->render('tasks/new.html.twig', [
@@ -49,17 +49,7 @@ class TasksController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tasks_show", methods={"GET"})
-     */
-    public function show(Tasks $task): Response
-    {
-        return $this->render('tasks/show.html.twig', [
-            'task' => $task,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="tasks_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="tasks_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Tasks $task): Response
     {
@@ -69,7 +59,7 @@ class TasksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tasks_index');
+            return $this->redirectToRoute('tasks');
         }
 
         return $this->render('tasks/edit.html.twig', [
@@ -79,7 +69,7 @@ class TasksController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="tasks_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="tasks_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Tasks $task): Response
     {
@@ -89,6 +79,6 @@ class TasksController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('tasks_index');
+        return $this->redirectToRoute('tasks');
     }
 }

@@ -19,49 +19,17 @@ class ProjectsRepository extends ServiceEntityRepository
         parent::__construct($registry, Projects::class);
     }
 
-    // /**
-    //  * @return Projects[] Returns an array of Projects objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Projects
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
-
     public function findUserProject(int $idUser)
     {
-
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
             'SELECT p.id id, p.name p_name, g.name g_name
         FROM App\Entity\Projects p
-        INNER JOIN App\Entity\UserGroup ug 
-        INNER JOIN App\Entity\Groups g
+        INNER JOIN App\Entity\UserGroup ug WITH p.id_group = ug.id_group
+        INNER JOIN App\Entity\Groups g WITH ug.id_group = g.id
         WHERE ug.id_user = :id'
-        )->setParameter('id', 1);
-
+        )->setParameter('id', $idUser);
 
         return $query->getResult();
     }

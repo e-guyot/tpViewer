@@ -19,32 +19,16 @@ class GroupsRepository extends ServiceEntityRepository
         parent::__construct($registry, Groups::class);
     }
 
-    // /**
-    //  * @return Groups[] Returns an array of Groups objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function findUserGroup ($idUser) {
+        $entityManager = $this->getEntityManager();
 
-    /*
-    public function findOneBySomeField($value): ?Groups
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $query = $entityManager->createQuery(
+            'SELECT g.id, g.name
+        FROM App\Entity\Groups g
+        INNER JOIN App\Entity\UserGroup ug WITH g.id = ug.id_group
+        WHERE ug.id_user = :id'
+        )->setParameter('id', $idUser);
+
+        return $query->getResult();
     }
-    */
 }

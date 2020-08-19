@@ -25,8 +25,8 @@
                 <td>{{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.name }}</td>
                 <td>
-                    <a href="{{ path('tasks_show', {'id': task.id}) }}">show</a>
-                    <a href="{{ path('tasks_edit', {'id': task.id}) }}">edit</a>
+                    <a class="btn" href="{{ path('tasks_edit', {'id': task.id}) }}">edit</a>
+                    {{ include('tasks/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
