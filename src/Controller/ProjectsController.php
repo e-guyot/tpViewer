@@ -17,7 +17,7 @@ class ProjectsController extends AbstractController
     /**
      * @Route("/", name="projects")
      */
-    public function index()
+    public function index(): Response
     {
         $user = $this->getUser();
         $projects = $this->getDoctrine()->getRepository(Projects::class)->findUserProject($user->getId());
@@ -29,7 +29,7 @@ class ProjectsController extends AbstractController
     /**
      * @Route("/new", name="projects_new")
      */
-    public function newProject (Request $request)
+    public function newProject (Request $request): Response
     {
         $projects = new Projects();
         $form = $this->createForm(ProjectsFormType::class, $projects);
@@ -53,7 +53,7 @@ class ProjectsController extends AbstractController
     /**
      * @Route("/edit/{id}", name="projects_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Projects $project)
+    public function edit(Request $request, Projects $project): Response
     {
         $form = $this->createForm(ProjectsFormType::class, $project);
         $form->handleRequest($request);

@@ -39,7 +39,7 @@ class TasksController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tasks_index');
+            return $this->redirectToRoute('tasks');
         }
 
         return $this->render('tasks/new.html.twig', [
@@ -59,7 +59,7 @@ class TasksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tasks_index');
+            return $this->redirectToRoute('tasks');
         }
 
         return $this->render('tasks/edit.html.twig', [
@@ -79,6 +79,6 @@ class TasksController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('tasks_index');
+        return $this->redirectToRoute('tasks');
     }
 }
