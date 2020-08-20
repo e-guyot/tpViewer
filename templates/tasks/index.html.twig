@@ -4,12 +4,14 @@
 
 {% block body %}
     <h1>Tasks index</h1>
-    <form name="chronoForm">
-        <input type="text" name="chronotime" id="chronotime" value="0:00:00:00"/>
-          <input type="button" name="startstop" value="start!" onClick="chronoStart()" />
-          <input type="button" name="reset" value="reset!" onClick="chronoReset()" />
-      </form>
-
+    <div id="divChrono">00:00:00</div>
+<form id="formChrono">
+   <input type="button" id="bStart" value="Démarrer" onClick="fStart()" />
+   <input type="button" id="bLap" value="Tours" onClick="fLap()" />
+   <input type="button" id="bStop" value="Stop" onClick="fStop()" />
+   <input type="button" id="bRecall" value="Rappels" onClick="fMemory()" />
+   <input type="button" id="bDel" value="Remise à zéro" onClick="fReset()" />
+</form>
     <table class="table">
         <thead>
             <tr>
