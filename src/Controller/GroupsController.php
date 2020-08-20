@@ -48,8 +48,10 @@ class GroupsController extends AbstractController
             $userGroup->setIdGroup($groups);
             $entityManager->persist($userGroup);
             $entityManager->flush();
+            
+            return $this->redirectToRoute('groups');
         }
-
+        
         return $this->render("groups/form.html.twig", [
             "form_title" => "Ajouter un groups",
             "form_groups" => $form->createView(),
