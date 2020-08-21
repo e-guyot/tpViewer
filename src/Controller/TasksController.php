@@ -22,6 +22,7 @@ class TasksController extends AbstractController
     {
         return $this->render('tasks/index.html.twig', [
             'tasks' => $tasksRepository->findAll(),
+            'taskUser' => $tasksRepository->findTaskUser()
         ]);
     }
 
@@ -80,5 +81,15 @@ class TasksController extends AbstractController
         }
 
         return $this->redirectToRoute('tasks');
+    }
+
+     /**
+     * @Route("/show/{id}", name="task_show", methods={"GET","POST"})
+     */
+    public function showtask(TasksRepository $tasksRepository, Tasks $task): Response
+    {
+        return $this->render('tasks/task.html.twig', [
+            'task' => $tasksRepository->findTask($task->getId()),
+        ]);
     }
 }
