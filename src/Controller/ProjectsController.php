@@ -6,6 +6,7 @@ use App\Form\ProjectsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Projects;
+use App\Repository\TasksRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -85,5 +86,17 @@ class ProjectsController extends AbstractController
         return $this->redirectToRoute('projects');
     }
 
+    /**
+     * @Route("/show/{id}", name="project_show")
+     */
+    public function show(TasksRepository $tasksRepository, Projects $project): Response
+    {
+        //$user = $this->getUser();
+        //$projects = $this->getDoctrine()->getRepository(Projects::class)->findUserProject($user->getId());
+
+        return $this->render('tasks/index.html.twig', [
+            "tasks" => $tasksRepository->findTaskUser($project->getId()),
+        ]);
+    }
 
 }
