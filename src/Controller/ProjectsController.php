@@ -95,7 +95,7 @@ class ProjectsController extends AbstractController
         //$projects = $this->getDoctrine()->getRepository(Projects::class)->findUserProject($user->getId());
 
         return $this->render('tasks/index.html.twig', [
-            "tasks" => $tasksRepository->findTaskUser($project->getId()),
+            "tasks" => $tasksRepository->findTasks($project->getId()),
         ]);
     }
 

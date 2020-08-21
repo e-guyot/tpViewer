@@ -50,13 +50,25 @@ class TasksRepository extends ServiceEntityRepository
         return $query->getResult();
     }
     
-    public function findTaskUser($value)
+    public function findTasks($value)
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT t.id id, t.timer timer, t.date_start dateStart, t.date_end dateEnd, t.name name
         FROM App\Entity\Tasks t
         INNER JOIN App\Entity\Projects p WITH p.id = t.id_project
+        WHERE t.id = :id'
+        )->setParameter('id', $value);
+
+        return $query->getResult();
+    }
+
+    public function findTask($value)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT t.id id, t.timer timer, t.date_start dateStart, t.date_end dateEnd, t.name name
+        FROM App\Entity\Tasks t
         WHERE t.id = :id'
         )->setParameter('id', $value);
 

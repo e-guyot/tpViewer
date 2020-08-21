@@ -86,11 +86,10 @@ class TasksController extends AbstractController
      /**
      * @Route("/show/{id}", name="task_show", methods={"GET","POST"})
      */
-    public function showtask(Request $request, Tasks $task): Response
+    public function showtask(TasksRepository $tasksRepository, Tasks $task): Response
     {
-        dump($task);
-        return $this->render('tasks/index.html.twig', [
-            'task' => $tasksRepository->findOneBySomeField($task->id),
+        return $this->render('tasks/task.html.twig', [
+            'task' => $tasksRepository->findTask($task->getId()),
         ]);
     }
 }
