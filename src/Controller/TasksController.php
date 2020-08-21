@@ -15,16 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TasksController extends AbstractController
 {
-    /**
-     * @Route("/", name="tasks", methods={"GET"})
-     */
-    public function index(TasksRepository $tasksRepository): Response
-    {
-        return $this->render('tasks/index.html.twig', [
-            'tasks' => $tasksRepository->findAll(),
-            'taskUser' => $tasksRepository->findTaskUser()
-        ]);
-    }
 
     /**
      * @Route("/new", name="tasks_new", methods={"GET","POST"})
