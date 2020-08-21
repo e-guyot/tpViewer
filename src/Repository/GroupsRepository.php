@@ -31,4 +31,17 @@ class GroupsRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    public function checkGroupProjects ($idGroup) {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT g.name, p.name
+        FROM App\Entity\Groups g
+        INNER JOIN App\Entity\Projects p WITH g.id = p.id_group
+        WHERE g.id = :id'
+        )->setParameter('id', $idGroup);
+
+        return $query->getResult();
+    }
 }

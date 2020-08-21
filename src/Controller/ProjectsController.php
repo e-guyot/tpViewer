@@ -84,6 +84,4 @@ class ProjectsController extends AbstractController
 
         return $this->redirectToRoute('projects');
     }
-
-
 }

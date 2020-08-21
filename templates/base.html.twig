@@ -46,6 +46,13 @@
         </ul>
     </div>
 </nav>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
