@@ -18,7 +18,7 @@
         {% for project in projects %}
             <tr>
                 <td>{{ project.id }}</td>
-                <td>{{ project.p_name }}</td>
+                <td><a href="{{ path('project_show', {'id':project.id}) }}">{{ project.p_name }}</a></td>
                 <td>{{ project.g_name }}</td>
                 <td>
                     <a class="btn" href="{{ path('projects_edit', {'id': project.id}) }}">edit</a>
