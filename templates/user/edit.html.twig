@@ -1,6 +1,75 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>{{ form_title }}</h1>
-    {{ form(form_user) }}
+    <!-- Tab links -->
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link tablinks active" id="defaultOpen" onclick="changeTabs(event, 'Edit')">Edit</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link tablinks" onclick="changeTabs(event, 'Data')">Data</a>
+        </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div id="Edit" class="tabcontent">
+        <h3>{{ form_title }}</h3>
+        {{ form(form_user) }}
+    </div>
+
+    <div id="Data" class="tabcontent">
+        <h3>Datavisualization</h3>
+        {# TODO: temps/taches par projet #}
+        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.getElementById("defaultOpen").click();
+
+        window.onload = function () {
+            console.log({{ dataPoints|json_encode|raw }})
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title: {
+                    text: "Time per project"
+                },
+                axisY: {
+                    title: "Minutes"
+                },
+                data: [{
+                    type: "column",
+                    showInLegend: true,
+                    legendMarkerColor: "grey",
+                    legendText: "Time spent on a project (min)",
+                    dataPoints: {{ dataPoints|json_encode|raw }}
+                }]
+            });
+            chart.render();
+        }
+
+
+        function changeTabs(evt, tab) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tab).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 {% endblock %}
