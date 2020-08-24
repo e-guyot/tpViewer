@@ -23,7 +23,7 @@
                 <td>{{ task.timer ? task.timer|date('H:i:s') : '' }}</td>
                 <td>{{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ task.name }}</td>
+                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.name }}</a></td>
                 <td>
                     <a class="btn" href="{{ path('tasks_edit', {'id': task.id}) }}">edit</a>
                     {{ include('tasks/_delete_form.html.twig') }}

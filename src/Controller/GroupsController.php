@@ -48,7 +48,7 @@ class GroupsController extends AbstractController
             $userGroup->setIdGroup($groups);
             $entityManager->persist($userGroup);
             $entityManager->flush();
-            
+
             return $this->redirectToRoute('groups');
         }
         
@@ -79,20 +79,34 @@ class GroupsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/delete/{id}", name="groups_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Groups $group): Response
+    {
+        $checkProjects = $this->getDoctrine()->getRepository(Groups::class)->checkGroupProjects($group->getId());
 
-    //TODO: delete all user_group + ne peut pas être delete si utilisé dans un projet
-//    /**
-//     * @Route("/delete/{id}", name="groups_delete", methods={"DELETE"})
-//     */
-//    public function delete(Request $request, Groups $group): Response
-//    {
-//        if ($this->isCsrfTokenValid('delete'.$group->getId(), $request->request->get('_token'))) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->remove($group);
-//            $entityManager->flush();
-//        }
-//
-//        return $this->redirectToRoute('groups');
-//    }
+        if (!empty($checkProjects)) {
+            $this->addFlash(
+                'notice',
+                'You can\'t delete that group.'
+            );
+
+            return $this->redirectToRoute('groups');
+        } else {
+            if ($this->isCsrfTokenValid('delete' . $group->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+
+                $userGroups = $this->getDoctrine()->getRepository(UserGroup::class)->getGroup($group->getId());
+                foreach ($userGroups as $userGroup) {
+                    $entityManager->remove($userGroup);
+                }
+                $entityManager->remove($group);
+                $entityManager->flush();
+            }
+
+            return $this->redirectToRoute('groups');
+        }
+    }
 
 }
