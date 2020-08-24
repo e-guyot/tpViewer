@@ -2,10 +2,11 @@
 
 {% block body %}
     <h1>{{ form_title }}</h1>
-    {% if user_role is defined %}
-    {% for user in user_role %}
-        {{ user }}
-    {% endfor %}
-    {% endif %}
-    {{ form(form_groups) }}
+    {{ form_start(form_groups) }}
+    <div class="form-group">
+        {{ form_label(form_groups.name) }}
+        {{ form_widget(form_groups.name, {'attr': {'class': 'form-control'}}) }}
+   </div>
+{{ form_row(form_groups.submit, {'attr': {'class': 'form-control'}}) }}
+{{ form_end(form_groups) }}
 {% endblock %}

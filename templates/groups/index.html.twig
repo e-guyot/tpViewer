@@ -5,31 +5,28 @@
 {% block body %}
     <h1>Groups index</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <a href="{{ path('groups_new') }}" class="btn btn-success active" role="button" aria-pressed="true">Create new</a>
+<div class="row"</div>
         {% for group in groups %}
-            <tr>
-                <td>{{ group.id }}</td>
-                <td>{{ group.name }}</td>
-                <td>
-                    <a class="btn" href="{{ path('groups_edit', {'id': group.id}) }}">edit</a>
-                    {{ include('groups/_delete_form.html.twig') }}
-                </td>
-            </tr>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ group.name }}</h5>
+              <p class="card-text">Description</p>
+              <div class="row">
+              <a class="card-link btn btn-primary" href="{{ path('groups_edit', {'id': group.id}) }}">edit</a>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteModal">
+                Delete
+              </button>
+                  
+        {{ include('groups/_delete_form.html.twig') }}
+            </div>
+            </div>
+          </div>
         {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+        <div class="alert alert-primary" role="alert">
+            No records found
+          </div>
         {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('groups_new') }}">Create new</a>
+
 {% endblock %}
