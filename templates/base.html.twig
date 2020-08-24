@@ -30,9 +30,6 @@
                     <a class="nav-link" href="{{ path('user_edit', {'id': app.user.id}) }}">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('tasks') }}">Tasks</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_logout') }}">Logout {{ app.user.username }}</a>
                 </li>
             {% else %}
