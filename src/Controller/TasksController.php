@@ -15,16 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TasksController extends AbstractController
 {
-    /**
-     * @Route("/", name="tasks", methods={"GET"})
-     */
-    public function index(TasksRepository $tasksRepository): Response
-    {
-        return $this->render('tasks/index.html.twig', [
-            'tasks' => $tasksRepository->findAll(),
-            'taskUser' => $tasksRepository->findTaskUser()
-        ]);
-    }
 
     /**
      * @Route("/new", name="tasks_new", methods={"GET","POST"})
@@ -40,7 +30,7 @@ class TasksController extends AbstractController
             $entityManager->persist($task);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tasks');
+            return $this->redirect($this->generateUrl('project_show', ['id' => $task->getIdProject()->getId()]));
         }
 
         return $this->render('tasks/new.html.twig', [
@@ -60,7 +50,7 @@ class TasksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tasks');
+            return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
         return $this->render('tasks/edit.html.twig', [

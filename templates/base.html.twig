@@ -30,9 +30,6 @@
                     <a class="nav-link" href="{{ path('user_edit', {'id': app.user.id}) }}">Account</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('tasks') }}">Tasks</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_logout') }}">Logout {{ app.user.username }}</a>
                 </li>
             {% else %}
@@ -46,10 +43,15 @@
         </ul>
     </div>
 </nav>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 {% block body %}{% endblock %}
-{% block javascripts %}
-{{ encore_entry_script_tags('app_timer') }}
-{% endblock %}
+{% block javascripts %}{% endblock %}
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
