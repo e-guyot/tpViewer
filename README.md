@@ -2,7 +2,7 @@
 
 Chronos est une application open source permettant de calculer le temps passer sur une tache d'un projet. 
 
-# Débuter Chronos 
+# Démarrer Chronos 
 ## Pré-requis 
 
 - symfony 4.15.0
