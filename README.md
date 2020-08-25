@@ -12,13 +12,14 @@ Chronos est une application open source permettant de calculer le temps passer s
 
 ## Installation
 
+Faire un git clone : ``` git clone https://github.com/e-guyot/tpViewer ```
 Lancer la commande : ```docker-compose up --build -d```
 Cet commande permet de lancer le projet avec sa base et son serveur local.
 
 ## Démarrage
 
-Ensuite vous pouvez aller sur n'importe quelle naviguateur et tapez : http://localhost:8080/
-Accéder à la bdd en ligne de commande taper : ``` docker exec -it tpviewer_db_1 mysql --user=docker -p docker ```
+Ensuite vous pouvez aller sur n'importe quelle navigateur et tapez : http://localhost:8080/
+Accéder à la bdd en ligne de commande : ``` docker exec -it tpviewer_db_1 mysql --user=docker -p docker ```
 
 ## Développé avec 
 
@@ -26,7 +27,7 @@ Accéder à la bdd en ligne de commande taper : ``` docker exec -it tpviewer_db_
 * [Bootstrap](https://getbootstrap.com/) - Framework CSS (front-end)
 * [Symfony](https://symfony.com/) - Framework PHP (back-end)
 
-# Contributing
+# Contributions
 Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://github.com/e-guyot/tpViewer/blob/master/CONTRIBUTING.md) pour savoir comment le faire.
 
 # Auteurs
