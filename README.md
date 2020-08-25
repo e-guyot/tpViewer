@@ -29,7 +29,7 @@ Accéder à la bdd en ligne de commande taper : ``` docker exec -it tpviewer_db_
 # Contributing
 Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://github.com/e-guyot/tpViewer/blob/master/CONTRIBUTING.md) pour savoir comment le faire.
 
-## Auteurs
+# Auteurs
 
 * **DIABY Lamine** _alias_ [@diabylamine](https://github.com/diabylamine)
 * **GUYOT Estelle** _alias_ [@e-guyot](https://github.com/e-guyot)
