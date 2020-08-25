@@ -2,6 +2,41 @@
 
 Chronos est une application open source permettant de calculer le temps passer sur une tache d'un projet. 
 
+# Démarrer Chronos 
+## Pré-requis 
+
+- symfony 4.15.0
+- php 7.4
+- mariadb 
+- docker 19.03
+
+## Installation
+
+Faire un git clone : ``` git clone https://github.com/e-guyot/tpViewer ```
+Lancer la commande : ```docker-compose up --build -d```
+Cet commande permet de lancer le projet avec sa base et son serveur local.
+
+## Démarrage
+
+Ensuite vous pouvez aller sur n'importe quelle navigateur et tapez : http://localhost:8080/
+Accéder à la bdd en ligne de commande : ``` docker exec -it tpviewer_db_1 mysql --user=docker -p docker ```
+
+## Développé avec 
+
+* [Php Storm](https://www.jetbrains.com/fr-fr/phpstorm/) - Editeur de textes
+* [Bootstrap](https://getbootstrap.com/) - Framework CSS (front-end)
+* [Symfony](https://symfony.com/) - Framework PHP (back-end)
+
+# Contributions
+Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://github.com/e-guyot/tpViewer/blob/master/CONTRIBUTING.md) pour savoir comment le faire.
+
+# Auteurs
+
+* **DIABY Lamine** _alias_ [@diabylamine](https://github.com/diabylamine)
+* **GUYOT Estelle** _alias_ [@e-guyot](https://github.com/e-guyot)
+* **JAEGLY Allan** _alias_ [@allanJGL](https://github.com/allanJGL)
+
+Liste des [contributeurs](https://github.com/e-guyot/tpViewer/contributors) 
 
 # License
 
