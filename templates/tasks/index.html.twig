@@ -20,7 +20,7 @@
         {% for task in tasks %}
             <tr>
                 <td>{{ task.id }}</td>
-                <td>{{ task.timer ? task.timer|date('H:i:s') : '' }}</td>
+                <td>{{ task.timer|date('H:i:s', '+00:00 GMT') }} </td>
                 <td>{{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
                 <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.name }}</a></td>

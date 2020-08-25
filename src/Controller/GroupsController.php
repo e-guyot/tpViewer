@@ -39,6 +39,7 @@ class GroupsController extends AbstractController
 
         $form = $this->createForm(GroupsFormType::class, $groups);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -49,9 +50,13 @@ class GroupsController extends AbstractController
             $entityManager->persist($userGroup);
             $entityManager->flush();
 
+            $user = $this->getUser();
+            $user->setRoles(['ROLE_ADMIN', 'ROLE_GROUP_'.$userGroup->getId()]);
+            $entityManager->persist($user);
+            $entityManager->flush();
+            
             return $this->redirectToRoute('groups');
         }
-        
         return $this->render("groups/form.html.twig", [
             "form_title" => "Ajouter un groups",
             "form_groups" => $form->createView(),
@@ -75,6 +80,7 @@ class GroupsController extends AbstractController
         return $this->render('groups/form.html.twig', [
             'form_title' => "Modifier groupe",
             'group' => $group,
+            'user_role'  => $this->getUser()->getRoles(),
             'form_groups' => $form->createView(),
         ]);
     }

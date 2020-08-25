@@ -18,7 +18,7 @@ class Tasks
     private $id;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $timer;
 
@@ -54,12 +54,12 @@ class Tasks
         return $this->id;
     }
 
-    public function getTimer(): ?\DateTimeInterface
+    public function getTimer(): ?int
     {
         return $this->timer;
     }
 
-    public function setTimer(?\DateTimeInterface $timer): self
+    public function setTimer(?int $timer): self
     {
         $this->timer = $timer;
 

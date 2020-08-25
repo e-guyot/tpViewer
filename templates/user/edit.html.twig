@@ -2,5 +2,8 @@
 
 {% block body %}
     <h1>{{ form_title }}</h1>
+    {% for role in roles %}
+    {{ role}}
+    {% endfor %}
     {{ form(form_user) }}
 {% endblock %}
