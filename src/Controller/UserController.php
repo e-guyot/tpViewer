@@ -36,7 +36,7 @@ class UserController extends AbstractController
         $dataPoints = $this->getDoctrine()->getRepository(Tasks::class)->timeProjectUser($user->getId());
 
         for ($i = 0; $i < sizeof($dataPoints); $i++){
-            $dataPoints[$i]['y'] = intval($dataPoints[$i]['y'])/60;
+            $dataPoints[$i]['y'] = $dataPoints[$i]['y']/60;
         }
 
         $form = $this->createForm(UserType::class, $user);
@@ -51,6 +51,7 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'form_title' => "Modification de son compte",
             'user' => $this->getUser(),
+            'roles' => $user->getRoles(),
             'form_user' => $form->createView(),
             'dataPoints' => $dataPoints
         ]);

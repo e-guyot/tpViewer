@@ -15,6 +15,9 @@
     <!-- Tab content -->
     <div id="Edit" class="tabcontent">
         <h3>{{ form_title }}</h3>
+        {% for role in roles %}
+            {{ role}}
+        {% endfor %}
         {{ form(form_user) }}
     </div>
 
