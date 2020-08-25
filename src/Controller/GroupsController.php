@@ -35,7 +35,8 @@ class GroupsController extends AbstractController
     {
         $groups = new Groups();
         $userGroup = new UserGroup();
-        $userGroup->setIdUser($this->getUser());
+        $user = $this->getUser();
+        $userGroup->setIdUser($user);
 
         $form = $this->createForm(GroupsFormType::class, $groups);
         $form->handleRequest($request);
@@ -50,7 +51,6 @@ class GroupsController extends AbstractController
             $entityManager->persist($userGroup);
             $entityManager->flush();
 
-            $user = $this->getUser();
             $user->setRoles(['ROLE_ADMIN', 'ROLE_GROUP_'.$userGroup->getId()]);
             $entityManager->persist($user);
             $entityManager->flush();
