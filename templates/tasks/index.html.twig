@@ -4,38 +4,31 @@
 
 {% block body %}
     <h1>Tasks index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Timer</th>
-                <th>Date_start</th>
-                <th>Date_end</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <a href="{{ path('tasks_new') }}" class="btn btn-success active" role="button" aria-pressed="true">Create new</a>
+<div class="row">
         {% for task in tasks %}
-            <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.timer ? task.timer|date('H:i:s') : '' }}</td>
-                <td>{{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
-                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.name }}</a></td>
-                <td>
-                    <a class="btn" href="{{ path('tasks_edit', {'id': task.id}) }}">edit</a>
+    <div class="card col-3">
+        <h5 class="card-header">{{ task.name }}</h5>
+        <div class="card-body">
+          <p class="card-text row">
+              <span class="col-12">Timer : {{ task.timer ? task.timer|date('H:i:s') : '' }}</span>
+              <span class="col-12">Start Timer : {{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</span>
+              <span class="col-12">End Timer : {{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</span>
+              <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-primary">show</a>
+              <a class="btn btn-primary" href="{{ path('tasks_edit', {'id': task.id}) }}">edit</a>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteModal">
+                Delete
+              </button>
                     {{ include('tasks/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+          </p>
+        </div>
+      </div>
 
-    <a href="{{ path('tasks_new') }}">Create new</a>
+    {% else %}
+    <div class="alert alert-primary" role="alert">
+        No records found
+    </div>
+{% endfor %}
+</div>
 {% endblock %}
+

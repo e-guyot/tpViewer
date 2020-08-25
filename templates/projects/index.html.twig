@@ -15,6 +15,7 @@
               <p class="card-text">Description</p>
               <div class="row">
               <a class="card-link btn btn-primary" href="{{ path('projects_edit', {'id': project.id}) }}">edit</a>
+              <a class="card-link btn btn-primary" href="{{ path('project_show', {'id': project.id}) }}">Show</a>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteModal">
                 Delete
               </button>
