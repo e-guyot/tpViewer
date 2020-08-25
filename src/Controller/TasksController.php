@@ -82,7 +82,11 @@ class TasksController extends AbstractController
         $seconds = $task->getTimer();
         if (isset($seconds)) {
             $timer = gmdate("H:i:s", $seconds);
+        } else {
+            $seconds = 0;
+            $timer = "";
         }
+
         return $this->render('tasks/task.html.twig', [
             'seconds' => $seconds,
             'timer' => $timer,
