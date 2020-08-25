@@ -29,14 +29,15 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="user_edit", methods={"GET","POST"})
+     * @Route("/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request): Response
     {
+        $user = $this->getUser();
         $dataPoints = $this->getDoctrine()->getRepository(Tasks::class)->timeProjectUser($user->getId());
 
         for ($i = 0; $i < sizeof($dataPoints); $i++){
-            $dataPoints[$i]['y'] = $dataPoints[$i]['y']/60;
+            $dataPoints[$i]['y'] = ceil($dataPoints[$i]['y']/60);
         }
 
         $form = $this->createForm(UserType::class, $user);

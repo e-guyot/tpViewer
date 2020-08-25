@@ -15,9 +15,6 @@
     <!-- Tab content -->
     <div id="Edit" class="tabcontent">
         <h3>{{ form_title }}</h3>
-        {% for role in roles %}
-            {{ role}}
-        {% endfor %}
         {{ form(form_user) }}
     </div>
 
@@ -34,7 +31,6 @@
         document.getElementById("defaultOpen").click();
 
         window.onload = function () {
-            console.log({{ dataPoints|json_encode|raw }})
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,

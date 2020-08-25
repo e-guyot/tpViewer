@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Groups;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/groups")
@@ -39,7 +41,7 @@ class GroupsController extends AbstractController
 
         $form = $this->createForm(GroupsFormType::class, $groups);
         $form->handleRequest($request);
-        
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -51,14 +53,14 @@ class GroupsController extends AbstractController
             $entityManager->flush();
 
             $user = $this->getUser();
-            $user->setRoles(['ROLE_ADMIN', 'ROLE_GROUP_'.$userGroup->getId()]);
+            $user->setRoles(['ROLE_ADMIN', 'ROLE_GROUP_' . $userGroup->getId()]);
             $entityManager->persist($user);
             $entityManager->flush();
-            
+
             return $this->redirectToRoute('groups');
         }
-        return $this->render("groups/form.html.twig", [
-            "form_title" => "Ajouter un groups",
+        return $this->render("groups/new.html.twig", [
+            "form_title" => "Add a group",
             "form_groups" => $form->createView(),
         ]);
     }
@@ -68,6 +70,7 @@ class GroupsController extends AbstractController
      */
     public function edit(Request $request, Groups $group): Response
     {
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
         $form = $this->createForm(GroupsFormType::class, $group);
         $form->handleRequest($request);
 
@@ -77,11 +80,12 @@ class GroupsController extends AbstractController
             return $this->redirectToRoute('groups');
         }
 
-        return $this->render('groups/form.html.twig', [
-            'form_title' => "Modifier groupe",
+        return $this->render('groups/edit.html.twig', [
+            'form_title' => "Edit group",
             'group' => $group,
-            'user_role'  => $this->getUser()->getRoles(),
+            'user_role' => $this->getUser()->getRoles(),
             'form_groups' => $form->createView(),
+            'users' => $users,
         ]);
     }
 
@@ -113,6 +117,39 @@ class GroupsController extends AbstractController
 
             return $this->redirectToRoute('groups');
         }
+    }
+
+    /**
+     * @Route("/add/{id}/{name}", name="add_user", methods={"GET","POST"})
+     * @ParamConverter("group", options={"mapping": {"name" : "name"}})
+     * @Template()
+     */
+    public function addUser(Request $request, User $user, Groups $group): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(GroupsFormType::class, $group);
+        $form->handleRequest($request);
+
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+        $userGroup = new UserGroup();
+        $userGroup->setIdUser($user);
+        $userGroup->setIdGroup($group);
+
+        $checkExists = $this->getDoctrine()->getRepository(UserGroup::class)->findBy(array('id_user' => $userGroup->getIdUser(), 'id_group' => $userGroup->getIdGroup()));
+
+        if (empty($checkExists)) {
+            $entityManager->persist($userGroup);
+            $entityManager->flush();
+        } else {
+            $this->addFlash(
+                'notice',
+                'User already added.'
+            );
+        }
+
+        return $this->redirect($this->generateUrl('groups_edit', ['id' => $group->getId()]));
     }
 
 }
