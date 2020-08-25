@@ -36,15 +36,43 @@ class TasksRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Tasks
+    public function findProjetTask(int $id)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p.id id, p.name p_name, g.name g_name
+        FROM App\Entity\Projects p
+        INNER JOIN App\Entity\Tasks ug WITH p.id_group = ug.id_group
+        WHERE ug.id_user = :id'
+        )->setParameter('id', $id);
+
+        return $query->getResult();
     }
-    */
+    
+    public function findTasks($value)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT t.id id, t.timer timer, t.date_start dateStart, t.date_end dateEnd, t.name name
+        FROM App\Entity\Tasks t
+        INNER JOIN App\Entity\Projects p WITH p.id = t.id_project
+        WHERE t.id = :id'
+        )->setParameter('id', $value);
+
+        return $query->getResult();
+    }
+
+    public function findTask($value)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT t.id id, t.timer timer, t.date_start dateStart, t.date_end dateEnd, t.name name
+        FROM App\Entity\Tasks t
+        WHERE t.id = :id'
+        )->setParameter('id', $value);
+
+        return $query->getResult();
+    }
+    
 }
