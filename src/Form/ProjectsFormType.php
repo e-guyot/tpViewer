@@ -25,7 +25,6 @@ class ProjectsFormType extends AbstractType
                     $q->innerJoin(UserGroup::class, 'ug', 'WITH', 'g.id = ug.id_group')
                         ->where('ug.id_user = :id')
                         ->setParameter(':id', $options['user']->getId());
-                    dump($q->getQuery());
                     return $q;
                 },
                 'choice_label' => 'name'

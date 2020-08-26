@@ -54,10 +54,11 @@ class TasksRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT t.id id, t.timer timer, t.date_start dateStart, t.date_end dateEnd, t.name name
+            'SELECT t.id id, t.timer timer, t.date_start dateStart, t.date_end dateEnd, t.name name, u.username username
         FROM App\Entity\Tasks t
         INNER JOIN App\Entity\Projects p WITH p.id = t.id_project
-        WHERE t.id = :id'
+        INNER JOIN App\Entity\User u WITH u.id = t.id_user
+        WHERE t.id_project = :id'
         )->setParameter('id', $value);
 
         return $query->getResult();

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Projects;
 use App\Entity\Tasks;
 use App\Form\TasksType;
 use App\Repository\TasksRepository;
@@ -18,12 +19,13 @@ class TasksController extends AbstractController
 {
 
     /**
-     * @Route("/new", name="tasks_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="tasks_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Projects $project): Response
     {
         $task = new Tasks();
-        $form = $this->createForm(TasksType::class, $task);
+        $task->setIdProject($project);
+        $form = $this->createForm(TasksType::class, $task, ['project' => $project]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
