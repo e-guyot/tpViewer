@@ -50,7 +50,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/edit.html.twig', [
-            'form_title' => "Modification de son compte",
+            'form_title' => "Edit account",
             'user' => $this->getUser(),
             'roles' => $user->getRoles(),
             'form_user' => $form->createView(),
