@@ -3,25 +3,31 @@
 {% block title %}Tasks index{% endblock %}
 
 {% block body %}
-    <h1>Tasks index</h1>
+    <h1>Tasks list</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Timer</th>
-                <th>Date_start</th>
-                <th>Date_end</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>User assigned</th>
+            <th>Timer</th>
+            <th>Date Start</th>
+            <th>Date End</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for task in tasks %}
             <tr>
                 <td>{{ task.id }}</td>
                 <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.name }}</a></td>
-                <td>{{ task.timer|date('H:i:s', '+00:00 GMT') }} </td>
+                <td>{{ task.username }}</td>
+                <td>
+                    {% if task.timer is not null %}
+                        {{ task.timer|date('H:i:s', '+00:00 GMT') }}
+                    {% endif %}
+                </td>
                 <td>{{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
@@ -37,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tasks_new') }}">Create new</a>
+    <a href="{{ path('tasks_new', {'id' : project_id }) }}">Create new</a>
 {% endblock %}
