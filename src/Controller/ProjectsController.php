@@ -49,7 +49,7 @@ class ProjectsController extends AbstractController
         }
 
         return $this->render("projects/form.html.twig", [
-            "form_title" => "Ajouter un projects",
+            "form_title" => "Create a new project",
             "form_projects" => $form->createView(),
         ]);
     }
@@ -69,7 +69,7 @@ class ProjectsController extends AbstractController
         }
 
         return $this->render('projects/form.html.twig', [
-            'form_title' => "Modifier projet",
+            'form_title' => "Edit a project",
             'project' => $project,
             'form_projects' => $form->createView(),
         ]);
@@ -94,11 +94,9 @@ class ProjectsController extends AbstractController
      */
     public function show(TasksRepository $tasksRepository, Projects $project): Response
     {
-        //$user = $this->getUser();
-        //$projects = $this->getDoctrine()->getRepository(Projects::class)->findUserProject($user->getId());
-
         return $this->render('tasks/index.html.twig', [
             "tasks" => $tasksRepository->findTasks($project->getId()),
+            "project_id" => $project->getId()
         ]);
     }
 
