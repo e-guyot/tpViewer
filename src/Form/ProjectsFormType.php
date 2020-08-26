@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Groups;
 use App\Entity\Projects;
+use App\Entity\UserGroup;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,7 +20,15 @@ class ProjectsFormType extends AbstractType
             ->add('name')
             ->add('id_group', EntityType::class, [
                 'class' => Groups::class,
-                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    $q = $er->createQueryBuilder('g');
+                    $q->innerJoin(UserGroup::class, 'ug', 'WITH', 'g.id = ug.id_group')
+                        ->where('ug.id_user = :id')
+                        ->setParameter(':id', $options['user']->getId());
+                    dump($q->getQuery());
+                    return $q;
+                },
+                'choice_label' => 'name'
             ])
             ->add('submit', SubmitType::class);
     }
@@ -27,6 +37,7 @@ class ProjectsFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Projects::class,
+            'user' => null,
         ]);
     }
 }
