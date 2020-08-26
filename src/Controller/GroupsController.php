@@ -52,10 +52,10 @@ class GroupsController extends AbstractController
             $entityManager->persist($userGroup);
             $entityManager->flush();
 
-            $user = $this->getUser();
-            $user->setRoles(['ROLE_ADMIN', 'ROLE_GROUP_' . $userGroup->getId()]);
-            $entityManager->persist($user);
-            $entityManager->flush();
+//            $user = $this->getUser();
+//            $user->setRoles(['ROLE_ADMIN', 'ROLE_GROUP_' . $userGroup->getId()]);
+//            $entityManager->persist($user);
+//            $entityManager->flush();
 
             return $this->redirectToRoute('groups');
         }
