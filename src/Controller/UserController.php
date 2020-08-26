@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tasks;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -32,6 +33,12 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user): Response
     {
+        $dataPoints = $this->getDoctrine()->getRepository(Tasks::class)->timeProjectUser($user->getId());
+
+        for ($i = 0; $i < sizeof($dataPoints); $i++){
+            $dataPoints[$i]['y'] = $dataPoints[$i]['y']/60;
+        }
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -46,6 +53,7 @@ class UserController extends AbstractController
             'user' => $this->getUser(),
             'roles' => $user->getRoles(),
             'form_user' => $form->createView(),
+            'dataPoints' => $dataPoints
         ]);
     }
 }

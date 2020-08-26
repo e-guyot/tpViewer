@@ -49,7 +49,7 @@ class TasksRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
-    
+
     public function findTasks($value)
     {
         $entityManager = $this->getEntityManager();
@@ -74,5 +74,20 @@ class TasksRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
-    
+
+    public function timeProjectUser($idUser)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT SUM(t.timer) y, p.name label
+            FROM App\Entity\Tasks t
+            INNER JOIN App\Entity\Projects p WITH p.id = t.id_project
+            WHERE t.id_user = :id
+            GROUP BY label'
+        )->setParameter('id', $idUser);
+
+        return $query->getResult();
+    }
+
 }

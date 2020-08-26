@@ -11,7 +11,7 @@
         <h5 class="card-header">{{ task.name }}</h5>
         <div class="card-body">
           <p class="card-text row">
-              <span class="col-12">Timer : {{ task.timer ? task.timer|date('H:i:s') : '' }}</span>
+              <span class="col-12">Timer : {{ task.timer ? task.timer|date('H:i:s', '+00:00GMT') : '' }}</span>
               <span class="col-12">Start Timer : {{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</span>
               <span class="col-12">End Timer : {{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</span>
               <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-primary">show</a>
