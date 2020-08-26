@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Groups;
 use App\Form\ProjectsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,13 +28,15 @@ class ProjectsController extends AbstractController
             "projects" => $projects,
         ]);
     }
+
     /**
      * @Route("/new", name="projects_new")
      */
-    public function newProject (Request $request): Response
+    public function newProject(Request $request): Response
     {
         $projects = new Projects();
-        $form = $this->createForm(ProjectsFormType::class, $projects);
+        $user = $this->getUser();
+        $form = $this->createForm(ProjectsFormType::class, $projects, ['user' => $user]);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
@@ -77,7 +80,7 @@ class ProjectsController extends AbstractController
      */
     public function delete(Request $request, Projects $project): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $project->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($project);
             $entityManager->flush();

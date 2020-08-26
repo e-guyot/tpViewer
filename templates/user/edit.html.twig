@@ -37,7 +37,6 @@
         document.getElementById("defaultOpen").click();
 
         window.onload = function () {
-            console.log({{ dataPoints|json_encode|raw }})
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
