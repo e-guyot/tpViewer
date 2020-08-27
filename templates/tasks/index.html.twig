@@ -3,45 +3,33 @@
 {% block title %}Tasks index{% endblock %}
 
 {% block body %}
-    <h1>Tasks list</h1>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>User assigned</th>
-            <th>Timer</th>
-            <th>Date Start</th>
-            <th>Date End</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <h1>Tasks index</h1>
+    <a href="{{ path('tasks_new', {'id': project_id }) }}" class="btn btn-success active" role="button" aria-pressed="true">Create new</a>
+<div class="row">
         {% for task in tasks %}
-            <tr>
-                <td>{{ task.id }}</td>
-                <td><a href="{{ path('task_show', {'id': task.id}) }}">{{ task.name }}</a></td>
-                <td>{{ task.username }}</td>
-                <td>
-                    {% if task.timer is not null %}
-                        {{ task.timer|date('H:i:s', '+00:00 GMT') }}
-                    {% endif %}
-                </td>
-                <td>{{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a class="btn" href="{{ path('tasks_edit', {'id': task.id}) }}">edit</a>
+    <div class="card col-3">
+        <h5 class="card-header">{{ task.name }}</h5>
+        <div class="card-body">
+          <p class="card-text row">
+              <span class="col-12">Username : {{ task.username }}</span>
+              <span class="col-12">Timer : {{ task.timer ? task.timer|date('H:i:s', '+00:00GMT') : '' }}</span>
+              <span class="col-12">Start Timer : {{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</span>
+              <span class="col-12">End Timer : {{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</span>
+              <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-primary">show</a>
+              <a class="btn btn-primary" href="{{ path('tasks_edit', {'id': task.id, 'id_project' : project_id }) }}">Edit</a>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">
+                Delete
+              </button>
                     {{ include('tasks/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+          </p>
+        </div>
+      </div>
 
-    <a href="{{ path('tasks_new', {'id' : project_id }) }}">Create new</a>
+    {% else %}
+    <div class="alert alert-primary" role="alert">
+        No records found
+    </div>
+{% endfor %}
+</div>
 {% endblock %}
+

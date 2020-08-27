@@ -91,4 +91,21 @@ class TasksRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function getTasks($idProject)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT t
+        FROM App\Entity\Tasks t
+        WHERE t.id_project = :id'
+        )->setParameter('id', $idProject);
+
+        $tasks = array_map(function ($value) {
+            return (object) $value;
+        }, $query->getResult());
+
+        return $tasks;
+    }
+
 }

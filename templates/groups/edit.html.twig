@@ -1,18 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Tasks{% endblock %}
+{% block title %}Edit group{% endblock %}
 
 {% block body %}
+<div class="row">
+    <div class="col-6">
     {{ include('groups/form.html.twig') }}
-<hr>
+    </div>
+    
+    <div class="col-6">
     <h3>Add user to group</h3>
     <div class="card" style="width: 18rem;">
-        <ul class="list-group list-group-flush">
-            {% for user in users %}
-                <li class="list-group-item"><a class="btn" href="{{ path('add_user', {'id': user.id, 'name': group.name}) }}">add</a> {{ user.username }}</li>
+            {% for user in users %}<a class="btn btn-success" href="{{ path('add_user', {'id': user.id, 'name': group.name}) }}">add : {{ user.username }}</a> 
             {% else %}
-                <li class="list-group-item">no records found</li>
+            <div class="alert alert-primary" role="alert">
+                No records found
+            </div>
             {% endfor %}
         </ul>
+    </div>
+    </div>
     </div>
 {% endblock %}

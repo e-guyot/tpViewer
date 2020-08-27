@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Groups;
+use App\Entity\Tasks;
 use App\Form\ProjectsFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,7 +60,8 @@ class ProjectsController extends AbstractController
      */
     public function edit(Request $request, Projects $project): Response
     {
-        $form = $this->createForm(ProjectsFormType::class, $project);
+        $user = $this->getUser();
+        $form = $this->createForm(ProjectsFormType::class, $project, ['user' => $user]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -82,6 +84,11 @@ class ProjectsController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $project->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $tasks = $this->getDoctrine()->getRepository(Tasks::class)->getTasks($project->getId());
+            foreach ($tasks as $task) {
+                $entityManager->remove($task);
+            }
+
             $entityManager->remove($project);
             $entityManager->flush();
         }
