@@ -57,7 +57,7 @@ class TasksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
+            return $this->redirect($this->generateUrl('project_show', ['id' => $task->getIdProject()->getId()]));
         }
 
         return $this->render('tasks/edit.html.twig', [

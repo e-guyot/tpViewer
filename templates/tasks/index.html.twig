@@ -16,8 +16,8 @@
               <span class="col-12">Start Timer : {{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</span>
               <span class="col-12">End Timer : {{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</span>
               <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-primary">show</a>
-              <a class="btn" href="{{ path('tasks_edit', {'id': task.id, 'id_project' : project_id }) }}">Edit</a>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteModal">
+              <a class="btn btn-primary" href="{{ path('tasks_edit', {'id': task.id, 'id_project' : project_id }) }}">Edit</a>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteModal">
                 Delete
               </button>
                     {{ include('tasks/_delete_form.html.twig') }}
