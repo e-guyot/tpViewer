@@ -3,8 +3,8 @@
     {{ form_start(form_groups) }}
     <div class="form-group">
         {{ form_label(form_groups.name) }}
-        {{ form_widget(form_groups.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form_groups.name, {'attr': {'class': 'form-control col-6'}}) }}
    </div>
-{{ form_row(form_groups.submit, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form_groups.submit, {'attr': {'class': 'form-control col-6 btn-primary'}}) }}
 {{ form_end(form_groups) }}
 {% endblock %}

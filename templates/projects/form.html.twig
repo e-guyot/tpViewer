@@ -5,12 +5,12 @@
     {{ form_start(form_projects) }}
     <div class="form-group">
         {{ form_label(form_projects.name) }}
-        {{ form_widget(form_projects.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form_projects.name, {'attr': {'class': 'form-control col-4'}}) }}
    </div>
    <div class="form-group">
     {{ form_label(form_projects.id_group) }}
-    {{ form_widget(form_projects.id_group, {'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form_projects.id_group, {'attr': {'class': 'form-control col-4'}}) }}
 </div>
-{{ form_row(form_projects.submit, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form_projects.submit, {'attr': {'class': 'form-control col-4 btn btn-primary'}}) }}
 {{ form_end(form_projects) }}
 {% endblock %}

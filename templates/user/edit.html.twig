@@ -24,8 +24,8 @@
     </ul> #}
     {{ form_start(form_user) }}
         {{ form_label(form_user.username) }}
-        {{ form_widget(form_user.username, {'attr': {'class': 'form-control'}}) }}
-        {{ form_row(form_user.submit, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form_user.username, {'attr': {'class': 'form-control col-4'}}) }}
+        {{ form_row(form_user.submit, {'attr': {'class': 'form-control col-4 btn btn-primary'}}) }}
     {{ form_end(form_user) }}
     </div>
 
