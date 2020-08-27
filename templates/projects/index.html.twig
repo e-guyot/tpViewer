@@ -5,33 +5,29 @@
 {% block body %}
     <h1>Projects index</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Groupe Name</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.id }}</td>
-                <td><a href="{{ path('project_show', {'id':project.id}) }}">{{ project.p_name }}</a></td>
-                <td>{{ project.g_name }}</td>
-                <td>
-                    <a class="btn" href="{{ path('projects_edit', {'id': project.id}) }}">edit</a>
-                    {{ include('projects/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <a href="{{ path('projects_new') }}" class="btn btn-success active" role="button" aria-pressed="true">Create new</a>
+    <div class="row"</div>
+    {% for project in projects %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="text-center card-title"><a
+                            href="{{ path('project_show', {'id': project.id}) }}">{{ project.p_name }}</a></h5>
+            </div>
+            <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ project.g_name }}</h6>
+                {# <p class="card-text">Description</p> #}
+                <div class="row">
+                    <a class="card-link btn btn-primary" href="{{ path('projects_edit', {'id': project.id}) }}">Edit</a>
 
-    <a href="{{ path('projects_new') }}">Create new</a>
+                    {{ include('projects/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-primary" role="alert">
+            No records found
+        </div>
+    {% endfor %}
+
+
 {% endblock %}
