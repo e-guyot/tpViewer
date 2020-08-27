@@ -4,18 +4,19 @@
 
 {% block body %}
     <h1>Tasks index</h1>
-    <a href="{{ path('tasks_new') }}" class="btn btn-success active" role="button" aria-pressed="true">Create new</a>
+    <a href="{{ path('tasks_new', {'id': project_id }) }}" class="btn btn-success active" role="button" aria-pressed="true">Create new</a>
 <div class="row">
         {% for task in tasks %}
     <div class="card col-3">
         <h5 class="card-header">{{ task.name }}</h5>
         <div class="card-body">
           <p class="card-text row">
+              <span class="col-12">Username : {{ task.username }}</span>
               <span class="col-12">Timer : {{ task.timer ? task.timer|date('H:i:s', '+00:00GMT') : '' }}</span>
               <span class="col-12">Start Timer : {{ task.dateStart ? task.dateStart|date('Y-m-d H:i:s') : '' }}</span>
               <span class="col-12">End Timer : {{ task.dateEnd ? task.dateEnd|date('Y-m-d H:i:s') : '' }}</span>
               <a href="{{ path('task_show', {'id': task.id}) }}" class="btn btn-primary">show</a>
-              <a class="btn btn-primary" href="{{ path('tasks_edit', {'id': task.id}) }}">edit</a>
+              <a class="btn" href="{{ path('tasks_edit', {'id': task.id, 'id_project' : project_id }) }}">Edit</a>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteModal">
                 Delete
               </button>

@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/tasks")
@@ -43,11 +45,13 @@ class TasksController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="tasks_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}/{id_project}", name="tasks_edit", methods={"GET","POST"})
+     * @ParamConverter("project", options={"mapping": {"id_project" : "id"}})
+     * @Template()
      */
-    public function edit(Request $request, Tasks $task): Response
+    public function edit(Request $request, Tasks $task, Projects $project): Response
     {
-        $form = $this->createForm(TasksType::class, $task);
+        $form = $this->createForm(TasksType::class, $task, ['project' => $project]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,7 +77,7 @@ class TasksController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('tasks');
+        return $this->redirectToRoute('project_show', ['id' => $task->getIdProject()->getId()]);
     }
 
     /**

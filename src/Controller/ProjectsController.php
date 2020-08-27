@@ -59,7 +59,8 @@ class ProjectsController extends AbstractController
      */
     public function edit(Request $request, Projects $project): Response
     {
-        $form = $this->createForm(ProjectsFormType::class, $project);
+        $user = $this->getUser();
+        $form = $this->createForm(ProjectsFormType::class, $project, ['user' => $user]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

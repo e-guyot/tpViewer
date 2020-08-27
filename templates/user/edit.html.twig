@@ -14,14 +14,19 @@
 
     <!-- Tab content -->
     <div id="Edit" class="tabcontent">
-        <h3>{{ form_title }}</h3>
-        <h2>Roles : </h2>
+        <h3>{{ form_title }}
+    </h3>
+    {# <h2>Roles : </h2>
         <ul>
         {% for role in roles %}
           <li>  {{ role }}</li>
         {% endfor %}
-    </ul>
-        {{ form(form_user) }}
+    </ul> #}
+    {{ form_start(form_user) }}
+        {{ form_label(form_user.username) }}
+        {{ form_widget(form_user.username, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(form_user.submit, {'attr': {'class': 'form-control'}}) }}
+    {{ form_end(form_user) }}
     </div>
 
     <div id="Data" class="tabcontent">

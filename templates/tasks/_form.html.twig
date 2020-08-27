@@ -7,9 +7,5 @@
     {{ form_label(form.id_user) }}
     {{ form_widget(form.id_user, {'attr': {'class': 'form-control'}}) }}
 </div>
-<div class="form-group">
-    {{ form_label(form.id_project) }}
-    {{ form_widget(form.id_project, {'attr': {'class': 'form-control'}}) }}
-</div>
 <button class="form-control" >{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
